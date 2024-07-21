@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 // Success alert
-export function successAlert(message:any) {
+export function successAlert(message:string) {
   Swal.fire({
     icon: 'success',
     title: message,

@@ -1,3 +1,8 @@
+// Import our custom CSS
+import '../scss/styles.scss'
+
+// Import all of Bootstrap's JS
+import * as bootstrap from 'bootstrap'
 import { UserController } from "./controllers/login.controller.js";
 import { successAlert, errorAlert} from "./alert.js";
 
@@ -23,9 +28,9 @@ form.addEventListener("submit", async (e: Event) => {
     } 
   } catch (error) {
     if (error instanceof Error) {
-        //errorAlert(error.message);
+        errorAlert(error.message);
     } else {
-        //errorAlert("Se produjo un error desconocido");
+        errorAlert("Se produjo un error desconocido");
     }
   }
 
