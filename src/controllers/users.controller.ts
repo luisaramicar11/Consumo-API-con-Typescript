@@ -1,5 +1,6 @@
 import {BodyResponseUpdateRole, BodyResponseAllUsers, BodyRequestCreateUser, BodyResponseCreateUser} from "../models/users.model.js"
 
+// class that allows creating, updating roles and painting users
 export class CrudUsersController {
   public domain: string;
 
@@ -7,10 +8,10 @@ export class CrudUsersController {
       this.domain = domain;
   }
 
-  async create(name: HTMLInputElement, lastname: HTMLInputElement, email: HTMLInputElement, password: HTMLInputElement): Promise<BodyResponseCreateUser> {
+  async create(name: HTMLInputElement, lastName: HTMLInputElement, email: HTMLInputElement, password: HTMLInputElement): Promise<BodyResponseCreateUser> {
       const newUser: BodyRequestCreateUser = {
           name: name.value,
-          lastname: lastname.value,
+          lastName: lastName.value,
           email: email.value,
           password: password.value,
       };
@@ -26,12 +27,28 @@ export class CrudUsersController {
         body: JSON.stringify(newUser),
       }
 
-      const response: Response = await fetch(`${this.domain}/users`, reqOptions);
-      if(!response.ok){
-        console.log(`Response body: ${((await response.json()).message)}`);
-        throw new Error(`Error al crear usuario: ${response.status} ${response.statusText}`);
+      const response: Response = await fetch(`${this.domain}/api/v1/users`, reqOptions);
+      let responseBodyCreateUser: BodyResponseCreateUser;
+      switch (response.status) {
+        case 400:
+          console.error(`Response body: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud: ${(await response.json()).message}`);
+        case 401:
+          console.error(`Response body: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: Credenciales incorrectas: ${(await response.json()).message}`);
+        case 404:
+          console.error(`Response body: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: No se encontró el recurso: ${(await response.json()).message}`);
+        case 500:
+          console.error(`Response body: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor: ${(await response.json()).message}`);
+        case 201:
+          responseBodyCreateUser = await response.json();
+          break;
+        default:
+          console.error(`Unexpected response: ${response.status}: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
       }
-      const responseBodyCreateUser: BodyResponseCreateUser = await response.json();
       return responseBodyCreateUser;
   }
 
@@ -47,7 +64,7 @@ export class CrudUsersController {
         headers: headers,
       }
 
-      const response: Response = await fetch(`${this.domain}/users?limit=${limit}&page=${page}`, reqOptions);
+      const response: Response = await fetch(`${this.domain}/api/v1/users?limit=${limit}&page=${page}`, reqOptions);
       if(!response.ok){
         console.log(`response body: ${(await response.json()).message}`)
         throw new Error(`Error reading book: ${response.statusText}`);
@@ -68,14 +85,30 @@ export class CrudUsersController {
       headers: headers,
     }
 
-    const response: Response = await fetch(`${this.domain}/users/${userId}/role?role=${role}`, reqOptions);
-      if (!response.ok) {
-          console.log(`response body: ${(await response.json()).message}`)
-          throw new Error(`Error updating book: ${response.statusText}`);
-      }
-     
-    const responseBodyUpdateBook: BodyResponseUpdateRole = await response.json();
-    return responseBodyUpdateBook;
+    const response: Response = await fetch(`${this.domain}/api/v1/users/${userId}/role?role=${role}`, reqOptions);
+    let responseBodyUpdateRole: BodyResponseUpdateRole;
+    
+    switch (response.status) {
+      case 400:
+        console.error(`Response body: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud: ${(await response.json()).message}`);
+      case 401:
+        console.error(`Response body: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: Credenciales incorrectas: ${(await response.json()).message}`);
+      case 404:
+        console.error(`Response body: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: No se encontró el recurso: ${(await response.json()).message}`);
+      case 500:
+        console.error(`Response body: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor: ${(await response.json()).message}`);
+      case 200:
+        responseBodyUpdateRole = await response.json();
+        break;
+      default:
+        console.error(`Unexpected response: ${response.status}`);
+        throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
+    }
+    return responseBodyUpdateRole;
        
 }
 }

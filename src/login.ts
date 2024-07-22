@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e: Event) => {
     if (error instanceof Error) {
         errorAlert(error.message);
     } else {
-        errorAlert("Se produjo un error desconocido");
+        errorAlert("An unknown error occurred");
     }
   }
 

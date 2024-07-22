@@ -1,3 +1,4 @@
+// class that allows you to paint the rows of the table where all users with their own account can be seen
 export class TableTemplateController {
     public tBodyUsers: HTMLTableSectionElement;
     constructor(tBodyUsers: HTMLTableSectionElement) {
