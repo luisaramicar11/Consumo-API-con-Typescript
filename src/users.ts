@@ -27,8 +27,6 @@ prevPage.addEventListener("click", async (e: Event) => {
 });
 
 nextPage.addEventListener("click", async (e: Event) => {
-  console.log("di click sobre next")
-  console.log(currentPage)
   if (currentPage >= 1) {
     currentPage++;
     console.log(currentPage)
