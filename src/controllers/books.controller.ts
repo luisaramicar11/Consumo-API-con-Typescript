@@ -1,5 +1,6 @@
 import {BodyResponseDeleteBook, BodyResponseGetById, BodyResponseGetAllBooks, BodyRequestCreateBook, BodyResponseCreateBook, BodyRequestUpdateBook, BodyResponseUpdateBook} from "../models/books.model.js";
 
+//class that contains the methods to create, update, bring, and delete a workbook
 export class BooksController {
     public domain: string;
 
@@ -26,22 +27,22 @@ export class BooksController {
        switch (response.status) {
         case 400:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
+          throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
         case 401:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: No autorizado`);
+          throw new Error(`Error: ${response.status}: Not authorized: ${(await response.json()).message}`);
         case 404:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: No se encontró el recurso`);
+          throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
         case 500:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
+          throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
         case 200:
           responseBodyGetAllBooks = await response.json();
           break;
         default:
           console.error(`Unexpected response: ${response.status}`);
-          throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
+          throw new Error(`Error: ${response.status}: Unexpected server response: ${(await response.json()).message}`);
       }
        return responseBodyGetAllBooks;
     }
@@ -72,26 +73,25 @@ export class BooksController {
 
         let responseBodyCreateBook: BodyResponseCreateBook
         switch (response.status) {
-            case 400:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
-            case 401:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No autorizado`);
-            case 404:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No se encontró el recurso`);
-            case 500:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
-            case 201:
-              responseBodyCreateBook = await response.json();
-              break;
-            default:
-              console.error(`Unexpected response: ${response.status}`);
-              throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
-          }
-       
+          case 400:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
+          case 401:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: Not authorized: ${(await response.json()).message}`);
+          case 404:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
+          case 500:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
+          case 201:
+            responseBodyCreateBook = await response.json();
+            break;
+          default:
+            console.error(`Unexpected response: ${response.status}`);
+            throw new Error(`Error: ${response.status}: Unexpected server response: ${(await response.json()).message}`);
+        }
         return responseBodyCreateBook;
     }
 
@@ -107,25 +107,25 @@ export class BooksController {
         const response: Response = await fetch(`${this.domain}/api/v1/books/${id}`, reqOptions);
         let responseBodyGetById: BodyResponseGetById
         switch (response.status) {
-            case 400:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
-            case 401:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No autorizado`);
-            case 404:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No se encontró el recurso`);
-            case 500:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
-            case 200:
-                responseBodyGetById = await response.json();
-              break;
-            default:
-              console.error(`Unexpected response: ${response.status}`);
-              throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
-          }
+          case 400:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
+          case 401:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: Not authorized: ${(await response.json()).message}`);
+          case 404:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
+          case 500:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
+          case 200:
+            responseBodyGetById = await response.json();
+            break;
+          default:
+            console.error(`Unexpected response: ${response.status}`);
+            throw new Error(`Error: ${response.status}: Unexpected server response: ${(await response.json()).message}`);
+        }
         return responseBodyGetById;
     };
 
@@ -153,25 +153,25 @@ export class BooksController {
         const response: Response = await fetch(`${this.domain}/api/v1/books/${idCatche}`, reqOptions);
         let responseBodyUpdateBook: BodyResponseUpdateBook;
         switch (response.status) {
-            case 400:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
-            case 401:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No autorizado`);
-            case 404:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No se encontró el recurso`);
-            case 500:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
-            case 200:
-                responseBodyUpdateBook = await response.json();
-              break;
-            default:
-              console.error(`Unexpected response: ${response.status}`);
-              throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
-          }
+          case 400:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
+          case 401:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: Not authorized: ${(await response.json()).message}`);
+          case 404:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
+          case 500:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
+          case 200:
+            responseBodyUpdateBook = await response.json();
+            break;
+          default:
+            console.error(`Unexpected response: ${response.status}`);
+            throw new Error(`Error: ${response.status}: Unexpected server response: ${(await response.json()).message}`);
+        }
         return responseBodyUpdateBook;
     };
 
@@ -189,25 +189,25 @@ export class BooksController {
         const response: Response = await fetch(`${this.domain}/api/v1/books/${id}`, reqOptions);
         let responseBodyDeleteBook: BodyResponseDeleteBook;
         switch (response.status) {
-            case 400:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
-            case 401:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No autorizado`);
-            case 404:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: No se encontró el recurso`);
-            case 500:
-              console.error(`Response body: ${(await response.json()).message}`);
-              throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
-            case 200:
-                responseBodyDeleteBook = await response.json();
-              break;
-            default:
-              console.error(`Unexpected response: ${response.status}`);
-              throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
-          }
+          case 400:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
+          case 401:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: Not authorized: ${(await response.json()).message}`);
+          case 404:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
+          case 500:
+            console.error(`Response body: ${(await response.json()).message}`);
+            throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
+          case 200:
+            responseBodyDeleteBook = await response.json();
+            break;
+          default:
+            console.error(`Unexpected response: ${response.status}`);
+            throw new Error(`Error: ${response.status}: Unexpected server response: ${(await response.json()).message}`);
+        }
 
         return responseBodyDeleteBook;
     }

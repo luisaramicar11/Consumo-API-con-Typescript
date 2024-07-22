@@ -3,6 +3,8 @@ import '../scss/styles.scss'
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
+
+//class that allows you to paint the card with the information of each book
 export class CardTemplateController {
     public containerBooks: HTMLDivElement;
 
@@ -23,7 +25,7 @@ export class CardTemplateController {
         cardBody.appendChild(h2);
 
         const h4 = document.createElement("h4");
-        h4.classList.add("card-subtitle", "mb-2", "text-muted", "text-center");
+        h4.classList.add("card-subtitle", "mb-2", "text-center");
         h4.textContent = author;
         cardBody.appendChild(h4);
 
@@ -42,12 +44,12 @@ export class CardTemplateController {
         figcaption.appendChild(p);
 
         const h6 = document.createElement("h6");
-        h6.classList.add("card-text", "text-start", "text-muted");
+        h6.classList.add("card-text", "text-start");
         h6.textContent = `Publication Date: ${publicationDate}`;
         figcaption.appendChild(h6);
 
         const div = document.createElement("div");
-        div.classList.add("d-flex", "justify-content-between", "mt-3");
+        div.classList.add("d-flex", "justify-content-between");
 
         const btnEdit = document.createElement("button");
         btnEdit.classList.add("btn", "btn-warning", "me-2");

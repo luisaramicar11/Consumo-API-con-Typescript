@@ -17,6 +17,7 @@ const limit: number = 10;
 
 let currentPage: number = 1;
 
+// event to exit and be redirected to index.html
 btnLogout.addEventListener("click", (e:Event) => {
     localStorage.removeItem("authToken");
     window.location.href = "index.html";
@@ -38,6 +39,7 @@ if(!token){
 
    const cardTemplate = new CardTemplateController(containerBooks);
 
+   // events for pagination
    prevPage.addEventListener("click", async (e:Event) =>  {
     if (currentPage >= 1){
         currentPage--
@@ -52,6 +54,7 @@ if(!token){
     }
    });
 
+   // form submit event
    form.addEventListener("submit", async (e:Event)=>{
     e.preventDefault();
      const crudBooks = new BooksController(URL_BOOKS);
@@ -70,6 +73,7 @@ if(!token){
       await allBooks(limit, currentPage);
    });
 
+   // event to listen for the edit book and delete book buttons
    containerBooks.addEventListener("click", async (e:Event)=>{
      if(e.target instanceof HTMLButtonElement){
         const crudBooks = new BooksController(URL_BOOKS);
@@ -104,6 +108,7 @@ if(!token){
    })
 
 
+   //function to paint all the books
    async function allBooks(limit: number, currentPage: number){
     const crudBooks = new BooksController(URL_BOOKS);
     try{

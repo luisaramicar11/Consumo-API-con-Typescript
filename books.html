@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="./src/scss/styles.scss">
 </head>
 <body class="font-raleway bg-light text-dark">
+    
   <header class="bg-info text-white shadow-lg">
     <nav class="navbar navbar-expand-lg navbar-dark container">
       <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
@@ -55,6 +56,8 @@
 
   <main class="container mt-5 p-4 bg-white shadow-lg rounded">
     <h1 class="text-center display-4 mb-5">Create Book</h1>
+
+    <!-- form to create or edit a book -->
     <form class="text-center mb-5">
       <div class="mb-3 text-start">
         <label for="title" class="form-label">Title</label>
@@ -78,7 +81,11 @@
       </div>
       <button type="submit" id="btn-new" class="btn bg-info fw-bold">Save</button>
     </form>
+
+    <!-- book container -->
     <div class="d-flex justify-content-center gap-3 flex-wrap container-books"></div>
+
+    <!-- container for pagination -->
     <div id="pagination" class="d-flex justify-content-between mt-4">
       <button id="prev-page" class="btn btn-primary">Previous</button>
       <button id="next-page" class="btn btn-primary">Next</button>
@@ -88,7 +95,7 @@
   <footer class="bg-info text-white text-center py-3 mt-5">
     <div class="container">
       <p class="mb-0">© 2024 Riwi. All rights reserved.</p>
-      <p class="mb-0">Developed by Luisa Fernanda Ramirez Cardona</p>
+      <p class="mb-0">Developed by luisaramicar11</p>
     </div>
   </footer>
 

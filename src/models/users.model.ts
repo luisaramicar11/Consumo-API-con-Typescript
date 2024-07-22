@@ -1,6 +1,7 @@
+// interfaces to create, update role and paint users
 export interface BodyRequestCreateUser {
     name: string,
-    lastname: string,
+    lastName: string,
     email: string,
     password: string
 }

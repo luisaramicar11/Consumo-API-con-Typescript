@@ -1,5 +1,6 @@
 import { BodyRequestLogin, BodyResponseLogin } from "../models/auth.model.js";
 
+// class that allows logging in a user that already exists
 export class UserController {
   public domain: string;
 
@@ -31,22 +32,22 @@ export class UserController {
     switch (response.status) {
       case 400:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud`);
+        throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud: ${(await response.json()).message}`);
       case 401:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: Credenciales incorrectas`);
+        throw new Error(`Error: ${response.status}: Credenciales incorrectas: ${(await response.json()).message}`);
       case 404:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: No se encontró el recurso`);
+        throw new Error(`Error: ${response.status}: No se encontró el recurso: ${(await response.json()).message}`);
       case 500:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor`);
+        throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor: ${(await response.json()).message}`);
       case 201:
         responseBodyLogin = await response.json();
         break;
       default:
         console.error(`Unexpected response: ${response.status}`);
-        throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
+        throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor: ${(await response.json()).message}`);
     }
 
     return responseBodyLogin;

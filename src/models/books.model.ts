@@ -1,3 +1,5 @@
+// interfaces to carry out the crud of books
+
 export interface BodyResponseGetAllBooks {
     message: string;
     data:    Datum[];
