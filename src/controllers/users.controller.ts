@@ -32,22 +32,22 @@ export class CrudUsersController {
       switch (response.status) {
         case 400:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
         case 401:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: Credenciales incorrectas: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: Incorrect credentials: ${(await response.json()).message}`);
         case 404:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: No se encontró el recurso: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
         case 500:
           console.error(`Response body: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor: ${(await response.json()).message}`);
+          throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
         case 201:
           responseBodyCreateUser = await response.json();
           break;
         default:
           console.error(`Unexpected response: ${response.status}: ${(await response.json()).message}`);
-          throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
+          throw new Error(`Error: ${response.status}: Unexpected server response`);
       }
       return responseBodyCreateUser;
   }
@@ -91,22 +91,22 @@ export class CrudUsersController {
     switch (response.status) {
       case 400:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: El servidor no puede procesar la solicitud: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: The server cannot process the request: ${(await response.json()).message}`);
       case 401:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: Credenciales incorrectas: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: Incorrect credentials: ${(await response.json()).message}`);
       case 404:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: No se encontró el recurso: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: The resource was not found: ${(await response.json()).message}`);
       case 500:
         console.error(`Response body: ${(await response.json()).message}`);
-        throw new Error(`Error: ${response.status}: Ha ocurrido un error interno en el servidor: ${(await response.json()).message}`);
+        throw new Error(`Error: ${response.status}: An internal error has occurred on the server: ${(await response.json()).message}`);
       case 200:
         responseBodyUpdateRole = await response.json();
         break;
       default:
         console.error(`Unexpected response: ${response.status}`);
-        throw new Error(`Error: ${response.status}: Respuesta inesperada del servidor`);
+        throw new Error(`Error: ${response.status}: Unexpected server response`);
     }
     return responseBodyUpdateRole;
        
